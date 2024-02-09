@@ -9,15 +9,15 @@ func _ready():
 	EventDispatch.service().subscribe(BlueSprite.ClickedBlueEvent.ID, self, "_on_blue_clicked")
 
 
-func _on_red_clicked(event: Event):
+func _on_red_clicked(_event: Event):
 	self.modulate.r += 0.05
 	
 	
-func _on_green_clicked(event: Event):
+func _on_green_clicked(_event: Event):
 	self.modulate.g += 0.05
 	
 	
-func _on_blue_clicked(event: Event):
+func _on_blue_clicked(_event: Event):
 	self.modulate.b += 0.05
 
 
