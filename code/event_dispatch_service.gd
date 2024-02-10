@@ -1,17 +1,27 @@
 extends Node
 class_name EventDispatchService
-# The pubsubhub for communicating
-# events throughout the game
+# The service that is responsible for tracking subscriptions
+# to events and broadcasting them out.
+# Follows a basic publisher/subscriber pattern. 
+
 
 # Dictionary of event_id to array of subscriptions
 onready var subscription_dictionary = Dictionary()
 
+
 # subscribe to an event type
 # dispatch stores subscriber, event id, and function to call
-func subscribe(event_id, subsciber, function_name):
+func subscribe(event_id, subsciber: Object, function_name: String) -> void:
 	# TODO: consider accepting a type the subscriber accepts so that 
 	# the dispatch can cast _for_ them and the handler can be written for the type in mind
+	# so that the subscriber doesn't have to cast the incoming Event
 	var subscription = EventSubscription.new(event_id, subsciber, function_name)
+	_add_subscription(subscription)
+		
+		
+func _add_subscription(subscription: EventSubscription) -> void:
+	var event_id = subscription.event_id
+	
 	if not event_id in subscription_dictionary:
 		subscription_dictionary[event_id] = [subscription]
 	else:
@@ -31,8 +41,7 @@ func subscribe(event_id, subsciber, function_name):
 # broadcast an event 
 # events are objects with a particular id
 # up to subscribers to cast and parse
-func broadcast(event: Event):
-	# look up subscribers based on id
+func broadcast(event: Event) -> void:
 	var event_id = event.event_id
 	if event_id in subscription_dictionary:
 		var existing_subs = subscription_dictionary[event_id]
@@ -52,7 +61,7 @@ func broadcast(event: Event):
 			
 # remove a subscription from an invalid subscriber
 # i.e. one that has been freed
-func _remove_invalid_subscription(event_id, subscription_array, subscription_to_remove):
+func _remove_invalid_subscription(event_id, subscription_array: Array, subscription_to_remove: EventSubscription):
 	var index_to_remove = subscription_array.find(subscription_to_remove)
 	if index_to_remove >= 0:
 		subscription_array.remove(index_to_remove)

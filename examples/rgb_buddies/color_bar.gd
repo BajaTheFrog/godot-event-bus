@@ -23,7 +23,3 @@ func _on_blue_clicked(_event: Event):
 
 func _on_reset_button_pressed():
 	self.modulate = Color(0, 0, 0, 1)
-	
-
-func _color_updated():
-	pass

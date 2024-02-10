@@ -12,52 +12,52 @@ _global_script_classes=[ {
 "base": "ClickableSprite",
 "class": "BlueSprite",
 "language": "GDScript",
-"path": "res://Examples/BlueSprite.gd"
+"path": "res://examples/rgb_buddies/blue_sprite.gd"
 }, {
 "base": "Area2D",
 "class": "ClickableArea2D",
 "language": "GDScript",
-"path": "res://Examples/ClickableArea2D.gd"
+"path": "res://examples/rgb_buddies/clickable_area_2D.gd"
 }, {
 "base": "Sprite",
 "class": "ClickableSprite",
 "language": "GDScript",
-"path": "res://Examples/ClickableSprite.gd"
+"path": "res://examples/rgb_buddies/clickable_sprite.gd"
 }, {
 "base": "ColorRect",
 "class": "ColorBar",
 "language": "GDScript",
-"path": "res://Examples/ColorBar.gd"
+"path": "res://examples/rgb_buddies/color_bar.gd"
 }, {
 "base": "Event",
 "class": "DictionaryEvent",
 "language": "GDScript",
-"path": "res://Src/DictionaryEvent.gd"
+"path": "res://code/dictionary_event.gd"
 }, {
 "base": "Reference",
 "class": "Event",
 "language": "GDScript",
-"path": "res://Src/Event.gd"
+"path": "res://code/event.gd"
 }, {
 "base": "Node",
 "class": "EventDispatchService",
 "language": "GDScript",
-"path": "res://Src/EventDispatchService.gd"
+"path": "res://code/event_dispatch_service.gd"
 }, {
 "base": "Reference",
 "class": "EventSubscription",
 "language": "GDScript",
-"path": "res://Src/EventSubscription.gd"
+"path": "res://code/event_subscription.gd"
 }, {
 "base": "ClickableSprite",
 "class": "GreenSprite",
 "language": "GDScript",
-"path": "res://Examples/GreenSprite.gd"
+"path": "res://examples/rgb_buddies/green_sprite.gd"
 }, {
 "base": "ClickableSprite",
 "class": "RedSprite",
 "language": "GDScript",
-"path": "res://Examples/RedSprite.gd"
+"path": "res://examples/rgb_buddies/red_sprite.gd"
 } ]
 _global_script_class_icons={
 "BlueSprite": "",
@@ -75,12 +75,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Event System"
-run/main_scene="res://Examples/Example1.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://examples/rgb_buddies/rgb_buddies.tscn"
+config/icon="res://defaults/icon.png"
 
 [autoload]
 
-EventDispatch="*res://Src/EventDispatch.tscn"
+EventDispatch="*res://code/event_dispatch.tscn"
 
 [gui]
 
@@ -92,4 +92,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://defaults/default_env.tres"

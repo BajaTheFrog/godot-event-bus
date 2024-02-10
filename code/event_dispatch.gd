@@ -1,9 +1,11 @@
 extends Node
-# class_name Events
-# Holds onto services relevant to global 
-# (and potentially local) dispatch and communication
+# Autoload: EventDispatch
+# Holds onto the service that tracks event 
+# subscription and broadcasting information
+
 
 onready var dispatch_service = $Dispatch
+
 
 func service() -> EventDispatchService:
 	return dispatch_service

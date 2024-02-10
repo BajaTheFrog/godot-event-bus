@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://Examples/ClickableArea2D.gd" type="Script" id=2]
-[ext_resource path="res://Examples/ClickableSprite.gd" type="Script" id=3]
+[ext_resource path="res://defaults/icon.png" type="Texture" id=1]
+[ext_resource path="res://examples/rgb_buddies/clickable_area_2D.gd" type="Script" id=2]
+[ext_resource path="res://examples/rgb_buddies/clickable_sprite.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Src/EventDispatch.gd" type="Script" id=1]
-[ext_resource path="res://Src/EventDispatchService.gd" type="Script" id=2]
+[ext_resource path="res://code/event_dispatch.gd" type="Script" id=1]
+[ext_resource path="res://code/event_dispatch_service.gd" type="Script" id=2]
 
 [node name="Events" type="Node"]
 script = ExtResource( 1 )
