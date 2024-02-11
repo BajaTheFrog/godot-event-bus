@@ -1,14 +1,15 @@
 # Godot Event Dispatch
-A simple event bus / pubsub implementation with sample(s)
+A simple event bus / pubsub implementation with sample(s).
 
 ## Setup + Installation
 This project currently uses the Godot LTS version -> `3.5.3`.
 
 #### Grab the code
-Download a zip of the code (or fork/clone the repo if you'd like)
+Download a zip of the code (or fork/clone the repo if you'd like).
 
 #### Check out the project
-Explore the samples in the project! 
+Explore the code and examples in the project! 
+You can run the example scene and interact with it to see `Events` in action.
 
 #### Add the code to your own project
 If/when you want to add the `EventBus` to your own project, copy the folder `res://addons/event_bus` and add it under `res://addons/` in your own project. 
@@ -21,7 +22,7 @@ Then click the add button to add it!
 ## Usage 
 There are two ways any part of your code base will want to interact with the `EventBus`.
 1. To **broadcast** an event (inform listeners in the game that something happened).
-2. To **subscribe** to an event (and be informed when certain events happen).
+2. To **subscribe** to an event (to be informed when certain events happen).
 
 That basically looks like this:
 ```gdscript
@@ -37,8 +38,8 @@ But we can look at some simple examples with a little more detail.
 ### Broadcasting
 To broadcast an event, its as simple as:
 ```gdscript
-func _something_happened():
-    var event = Event.new("SOMETHING_HAPPENED_EVENT_ID")
+func _something_cool_happened():
+    var event = Event.new("COOL_EVENT_ID")
     EventBus.service().broadcast(event)
 ```
 
@@ -54,6 +55,7 @@ class HealthEvent extends Event
 
     const ID = "HEALTH_EVENT_ID"
 
+    # this passes in ID to the base `Event` _init
     func _init(old_value: float, new_value: float).(ID):
         self.old_health = old_value
         self.new_health = new_value
@@ -82,13 +84,13 @@ Let's see what that might look like in the simplest case:
 
 ```gdscript
 func _ready():
-    Eventbus.service().subscribe("SOMETHING_HAPPENED_EVENT_ID",
+    Eventbus.service().subscribe("COOL_EVENT_ID",
             self, 
-            "_on_something_happened")
+            "_on_cool_happenings")
 
 
-func _on_something_happened(event: Event):
-    print("The something happened event happened!")
+func _on_cool_happenings(event: Event):
+    print("Some cool event happened!")
 ```
 
 All `Event` callbacks will be handed an `Event` object. 
