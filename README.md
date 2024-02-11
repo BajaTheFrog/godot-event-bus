@@ -3,19 +3,24 @@ A simple event bus / pubsub implementation with sample(s).
 
 ## Setup + Installation
 This project currently uses the Godot LTS version -> `3.5.3`.
+<br><br>
 
 #### Grab the code
 Download a zip of the code (or fork/clone the repo if you'd like).
+<br><br>
 
 #### Check out the project
 Explore the code and examples in the project! 
 You can run the example scene and interact with it to see `Events` in action.
+<br><br>
 
 #### Add the code to your own project
 If/when you want to add the `EventBus` to your own project, copy the folder `res://addons/event_bus` and add it under `res://addons/` in your own project. 
+<br><br>
 
 #### Set up the `EventBus` autoload
 Add the `EventBus` autoload to your own project by going to `Project > Project Settings > Autoload`, hitting the folder button and selecting `res://addons/event_bus/event_bus.tscn`. 
+<br><br>
 
 Then click the add button to add it! 
 
