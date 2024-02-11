@@ -35,7 +35,7 @@ That basically looks like this:
 EventBus.service().broadcast(<Event>)
 
 # Subscribing
-EventBus.service().subscribe(<Event ID>, <subscriber>, <function name>)
+EventBus.service().subscribe(<Event ID>, <Subscriber>, <Function Name>)
 ```
 
 But we can look at some simple examples with a little more detail.
