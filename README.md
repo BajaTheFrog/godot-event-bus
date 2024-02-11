@@ -1,71 +1,116 @@
 # Godot Event Dispatch
 A simple event bus / pubsub implementation with sample(s)
 
-## TL;DR 
-Here's code you can use to quickly set up an `Event Bus` in your game. 
+## Setup + Installation
+This project currently uses the Godot LTS version -> `3.5.3`.
 
-If you don't know what an `Event Bus` is, or why you might want it. There are a lot of good resources you can find on the topic. 
+#### Grab the code
+Download a zip of the code (or fork/clone the repo if you'd like)
 
-But the short version is: to prevent making insane, unmanageable code, a _great pattern_ for disparate parts of your game to know about what's happening elsewhere is with `Events`. 
+#### Check out the project
+Explore the samples in the project! 
 
-`Signals` are a _fantastic_ at the "local" level, they still require directly connecting from one node to another. 
+#### Add the code to your own project
+If/when you want to add the `EventBus` to your own project, copy the folder `res://addons/event_bus` and add it under `res://addons/` in your own project. 
 
-This doesn't scale well as lots of things enter the fray. 
+#### Set up the `EventBus` autoload
+Add the `EventBus` autoload to your own project by going to `Project > Project Settings > Autoload`, hitting the folder button and selecting `res://addons/event_bus/event_bus.tscn`. 
 
+Then click the add button to add it! 
 
-## Tell me more
-Many Godot developers are familiar with the phrase:
+## Usage 
+There are two ways any part of your code base will want to interact with the `EventBus`.
+1. To **broadcast** an event (inform listeners in the game that something happened).
+2. To **subscribe** to an event (and be informed when certain events happen).
 
-> _"Call down, signal up"_
+That basically looks like this:
+```gdscript
+# Broadcasting
+EventBus.service().broadcast(<Event>)
 
-It's a helpful, catchy reminder and guidance about inter-node communication. 
+# Subscribing
+EventBus.service().subscribe(<Event ID>, <subscriber>, <function name>)
+```
 
-**But** really it's advice that is best suited for direct parent-child node relationships. Maybe grandparents too. 
+But we can look at some simple examples with a little more detail.
 
-As more and more nodes and scenes enter your tree, you are asking for a headache if you are 
+### Broadcasting
+To broadcast an event, its as simple as:
+```gdscript
+func _something_happened():
+    var event = Event.new("SOMETHING_HAPPENED_EVENT_ID")
+    EventBus.service().broadcast(event)
+```
 
-1. Directly calling down to some arbitrary scene 
-2. Connecting signals between dynamically added scenes and lots of possible systems
+You can also subclass `Event` with more information-rich objects and broadcast them the same way. Let's imagine we have an `Event` object that has information about a player's health changing.
 
-So what if I told you there was a (not-so) secret, **third thing**?
+```gdscript
+extends Node
+class_name Player
 
-`Events`. 
+class HealthEvent extends Event
+    var old_health: float
+    var new_health: float
 
-### A classic example
-You are making a game. 
-There is a `hero`. 
-There is combat. 
+    const ID = "HEALTH_EVENT_ID"
 
-You need the UI to display a healthbar that communicates how much health the `hero` has left. 
-
-#### Call down
-The health bar UI has to get, or be given, a reference to the `hero` and then check every frame to see what their health is. 
-This is wasteful AND it makes it harder to build and debug the UI on its own because it _requires_ a `hero` to work. No good. 
-
-
-#### Signal up
-The health bar UI has to get, or be given, a reference to the `hero` and connects itself to a `signal` about health changes. This is an improvement as we no longer are checking every frame but the fact remains we still have to rely on a `hero` reference. 
-
-And if we flipped the dependencies we would have the same problem where the `hero` would demand some access to the UI. 
-
-
-#### Using events instead
-By using `Events`, a `hero` can broadcast an `Event` much like they would trigger a `signal`. 
-
-But now, the UI can register with the `Event Bus` to listen for `Events` with a speific ID (let's say `HERO_HEATH_EVENT`, as an example) without having to find a `hero` to directly hook up to. 
-
-This removes an entire dependency concern and opens up the possibility of simulating events through hotkeys and debug tools. 
-
-And its just as easy for an arbitrary number of other nodes and systems to listen to `HERO_HEATH_EVENT`s too. 
-
-Want an enemy that gets stronger when the `hero` is weak? 
-A chest that only unlocks when `hero` health is full? 
-
-Easily implemented by subscribing without needing to guarantee a `hero` is ever in the scene. 
+    func _init(old_value: float, new_value: float).(ID):
+        self.old_health = old_value
+        self.new_health = new_value
 
 
-## Okay, show me how it works
-Great. Happy to. 
+func take_damage(dmg: float):
+    var old_health = health.value
+    health.value -= dmg
+    var new_health = health.value
 
-This implementation uses an `Autoload` called `EventDispatch`. 
+    var health_event = HealthEvent.new(old_health, new_health)
+    EventBus.service().broadcast(event)
+```
 
+### Subscribing
+To subscribe to an event, all you need to know about the `Event` you want to subscribe to is the `event_id`.
+
+Subscribing takes 3 arguments:
+1. `event_id`: the id of the event you care about
+2. `subscriber`: the object/node that will respond to the event
+3. `function_name`: the function that will be called in response to the event. 
+
+It's almost identical to connecting a `signal`.
+
+Let's see what that might look like in the simplest case:
+
+```gdscript
+func _ready():
+    Eventbus.service().subscribe("SOMETHING_HAPPENED_EVENT_ID",
+            self, 
+            "_on_something_happened")
+
+
+func _on_something_happened(event: Event):
+    print("The something happened event happened!")
+```
+
+All `Event` callbacks will be handed an `Event` object. 
+
+In the case that you are listening for a specific `Event` subclass, you can use the `as` keyword to see if the `Event` meets your subclass criteria and then get the speicific properties you need from it. 
+
+```gdscript
+func _ready():
+    Eventbus.service().subscribe(Player.HealthEvent.ID,
+            self, 
+            "_on_player_health_event")
+
+
+func _on_player_health_event(event: Event):
+    var player_health_event = event as Player.HealthEvent
+    if player_health_event:
+        print(str(player_health_event.old_value))
+        print(str(player_health_event.new_value))
+```
+
+## Contributing
+Pull Requests are welcome, though I imagine major changes to the implementation will mostly live as other examples (such as a C# implementation). 
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
