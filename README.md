@@ -1,4 +1,4 @@
-# Godot Event Dispatch
+# Godot Event Bus
 A simple event bus / pubsub implementation with sample(s).
 
 ## Setup + Installation
@@ -111,8 +111,19 @@ func _on_player_health_event(event: Event):
         print(str(player_health_event.new_value))
 ```
 
+## Other Examples
+But don't just take my word for it! Here are some other Godot-focused `EventBus` implementations I found when poking around. If my version doesn't click for you maybe theirs will. 
+
+- [naata - Godot Event Bus](https://github.com/Naata/godot-event-bus)
+- [mikica1986vee - EventBus for Godot Engine](https://github.com/mikica1986vee/EventBus_for_Godot_engine)
+- [fwerner13 - Godot Event Bus](https://github.com/fwerner13/godot-event-bus)
+- [Edearth - Godot Event Bus Sample](https://github.com/Edearth/godot-event-bus-sample)
+- [ridvandongelci - Godot Bridge for Android](https://github.com/ridvandongelci/GodotBridge)
+- [loteque - Event Singleton Demo](https://github.com/loteque/event-singleton-demo)
+
 ## Contributing
 Pull Requests are welcome, though I imagine major changes to the implementation will mostly live as other examples (such as a C# implementation). 
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
