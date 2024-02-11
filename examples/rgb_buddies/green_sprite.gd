@@ -3,12 +3,12 @@ class_name GreenSprite
 
 
 func _ready():
-	EventDispatch.service().subscribe(RedSprite.ClickedRedEvent.ID, self, "_on_red_click")
+	EventBus.service().subscribe(RedSprite.ClickedRedEvent.ID, self, "_on_red_click")
 
 
 func _on_click():
 	var green_event = ClickedGreenEvent.new(self.rotation_degrees)
-	EventDispatch.service().broadcast(green_event)
+	EventBus.service().broadcast(green_event)
 
 
 func _on_red_click(event: Event):

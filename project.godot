@@ -32,22 +32,22 @@ _global_script_classes=[ {
 "base": "Event",
 "class": "DictionaryEvent",
 "language": "GDScript",
-"path": "res://code/dictionary_event.gd"
+"path": "res://addons/event_bus/dictionary_event.gd"
 }, {
 "base": "Reference",
 "class": "Event",
 "language": "GDScript",
-"path": "res://code/event.gd"
+"path": "res://addons/event_bus/event.gd"
 }, {
 "base": "Node",
-"class": "EventDispatchService",
+"class": "EventBusService",
 "language": "GDScript",
-"path": "res://code/event_dispatch_service.gd"
+"path": "res://addons/event_bus/event_bus_service.gd"
 }, {
 "base": "Reference",
 "class": "EventSubscription",
 "language": "GDScript",
-"path": "res://code/event_subscription.gd"
+"path": "res://addons/event_bus/event_subscription.gd"
 }, {
 "base": "ClickableSprite",
 "class": "GreenSprite",
@@ -66,7 +66,7 @@ _global_script_class_icons={
 "ColorBar": "",
 "DictionaryEvent": "",
 "Event": "",
-"EventDispatchService": "",
+"EventBusService": "",
 "EventSubscription": "",
 "GreenSprite": "",
 "RedSprite": ""
@@ -80,7 +80,7 @@ config/icon="res://defaults/icon.png"
 
 [autoload]
 
-EventDispatch="*res://code/event_dispatch.tscn"
+EventBus="*res://addons/event_bus/event_bus.tscn"
 
 [gui]
 

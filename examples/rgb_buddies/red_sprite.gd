@@ -13,7 +13,7 @@ func _ready():
 func _on_click():
 	times_clicked += 1
 	var event = ClickedRedEvent.new(times_clicked)
-	EventDispatch.service().broadcast(event)
+	EventBus.service().broadcast(event)
 	
 
 ###### Event Definition ###### 

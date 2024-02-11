@@ -1,5 +1,5 @@
 extends Node
-class_name EventDispatchService
+class_name EventBusService
 # The service that is responsible for tracking subscriptions
 # to events and broadcasting them out.
 # Follows a basic publisher/subscriber pattern. 

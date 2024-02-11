@@ -3,11 +3,11 @@ class_name BlueSprite
 
 
 func _ready():
-	EventDispatch.service().subscribe(GreenSprite.ClickedGreenEvent.ID, self, "_on_green_click")
+	EventBus.service().subscribe(GreenSprite.ClickedGreenEvent.ID, self, "_on_green_click")
 
 
 func _on_click():
-	EventDispatch.service().broadcast(ClickedBlueEvent.new())
+	EventBus.service().broadcast(ClickedBlueEvent.new())
 
 
 func _on_green_click(event: Event):
