@@ -54,6 +54,17 @@ You can also subclass `Event` with more information-rich objects and broadcast t
 extends Node
 class_name Player
 
+
+func take_damage(dmg: float):
+    var old_health = health.value
+    health.value -= dmg
+    var new_health = health.value
+
+    var health_event = HealthEvent.new(old_health, new_health)
+    EventBus.service().broadcast(event)
+
+
+# Defining our custom Player.HealthEvent
 class HealthEvent extends Event
     var old_health: float
     var new_health: float
@@ -65,14 +76,6 @@ class HealthEvent extends Event
         self.old_health = old_value
         self.new_health = new_value
 
-
-func take_damage(dmg: float):
-    var old_health = health.value
-    health.value -= dmg
-    var new_health = health.value
-
-    var health_event = HealthEvent.new(old_health, new_health)
-    EventBus.service().broadcast(event)
 ```
 
 ### Subscribing
