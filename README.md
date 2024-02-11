@@ -84,7 +84,7 @@ Let's see what that might look like in the simplest case:
 
 ```gdscript
 func _ready():
-    Eventbus.service().subscribe("COOL_EVENT_ID",
+    EventBus.service().subscribe("COOL_EVENT_ID",
             self, 
             "_on_cool_happenings")
 
@@ -99,7 +99,7 @@ In the case that you are listening for a specific `Event` subclass, you can use 
 
 ```gdscript
 func _ready():
-    Eventbus.service().subscribe(Player.HealthEvent.ID,
+    EventBus.service().subscribe(Player.HealthEvent.ID,
             self, 
             "_on_player_health_event")
 
