@@ -1,5 +1,9 @@
+![](docs/bus_banner.png)
+
 # Godot Event Bus
 A simple event bus / pubsub implementation with sample(s).
+
+Check out [my blogpost here](https://dev.to/bajathefrog/riding-the-event-bus-in-godot-ped) if you wanna learn more about what an `Event Bus` is or why you would use one in your Godot project!.
 
 ## Setup + Installation
 This project currently uses the Godot LTS version -> `3.5.3`.
